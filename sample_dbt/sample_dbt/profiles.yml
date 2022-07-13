@@ -1,0 +1,14 @@
+sample_dbt:
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      location: US
+      project: "{{ env_var('BIGQUERY_PROJECT') }}"
+      dataset: "{{ env_var('BIGQUERY_DATASET') }}"
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      priority: interactive
+      threads: 1
+      keyfile: "{{ env_var('BIGQUERY_SERVICE_ACCOUNT_KEYPATH') }}"
+  target: dev
