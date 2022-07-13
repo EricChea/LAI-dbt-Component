@@ -8,7 +8,6 @@ setup(
     description="⚡ Lightning component ⚡ to run dbt.",
     author="",
     author_email="",
-    # REPLACE WITH YOUR OWN GITHUB PROJECT LINK
     url="https://github.com/EricChea/LAI-dbt-Component",
     install_requires=[],
     packages=find_packages(),

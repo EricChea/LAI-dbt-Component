@@ -1,37 +1,67 @@
-# lai_dbt_component component
+<!---:lai-name: dbt--->
 
-This ⚡ [Lightning component](lightning.ai) ⚡ was generated automatically with:
+<div align="center">
+<img src="static/big-query-icon.png" width="200px">
 
-```bash
-lightning init component lai_dbt
+```
+A Lightning component to run dbt as a lightning app component.
+______________________________________________________________________
 ```
 
-## To run lai_dbt_component
+![Tests](https://github.com/PyTorchLightning/LAI-dbt-Component/actions/workflows/ci-testing.yml/badge.svg)
 
-First, install lai_dbt_component (warning: this app has not been officially approved on the lightning gallery):
+</div>
 
-```bash
-lightning install component https://github.com/theUser/lai_dbt_component
-```
+### About
 
-Once the app is installed, use it in an app:
+This component lets you run dbt.
+
+### Use the component
+
+To run dbt
 
 ```python
-from lai_dbt import TemplateComponent
-import lightning_app as la
+import lightning as L
+from lightning.app.storage import Path
 
+from lai_dbt import DBT
 
-class LitApp(lapp.LightningFlow):
+class YourComponent(L.LightningFlow):
     def __init__(self) -> None:
         super().__init__()
-        self.lai_dbt_component = TemplateComponent()
+        self.dbt_project_dir = Path("<PATH TO DBT PROJECT DIR>")
+        self.dbt_profile_dir = Path("<PATH TO DBT PROFILE DIR>")
+        self.dbt = DBT(self.dbt_project_dir)
 
     def run(self):
-        print(
-            "this is a simple Lightning app to verify your component is working as expected"
+        self.dbt.execute_command(
+            command = [
+                "dbt", "run", "--project-dir", self.dbt_project_dir,
+                "--profiles-dir", self.dbt_profile_dir
+            ],
         )
-        self.lai_dbt_component.run()
 
+app = L.LightningApp(YourComponent())
 
-app = lapp.LightningApp(LitApp())
+```
+
+### Install
+
+Run the following to install:
+
+```shell
+git clone https://github.com/PyTorchLightning/LAI-dbt-Component
+cd LAI-dbt-Component
+pip install -r requirements.txt
+pip install -e .
+```
+
+### Tests
+
+To run unit tests locally:
+
+```shell
+# From the root level of the package (LAI-bigquery)
+pip install -r tests/requirements.txt
+pytest
 ```
