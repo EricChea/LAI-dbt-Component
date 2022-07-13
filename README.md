@@ -1,7 +1,7 @@
 <!---:lai-name: dbt--->
 
 <div align="center">
-<img src="static/big-query-icon.png" width="200px">
+<img src="static/dbt.png" width="200px">
 
 ```
 A Lightning component to run dbt as a lightning app component.
@@ -26,6 +26,7 @@ from lightning.app.storage import Path
 
 from lai_dbt import DBT
 
+
 class YourComponent(L.LightningFlow):
     def __init__(self) -> None:
         super().__init__()
@@ -35,14 +36,11 @@ class YourComponent(L.LightningFlow):
 
     def run(self):
         self.dbt.execute_command(
-            command = [
-                "dbt", "run", "--project-dir", self.dbt_project_dir,
-                "--profiles-dir", self.dbt_profile_dir
-            ],
+            command=["dbt", "run", "--project-dir", self.dbt_project_dir, "--profiles-dir", self.dbt_profile_dir],
         )
 
-app = L.LightningApp(YourComponent())
 
+app = L.LightningApp(YourComponent())
 ```
 
 ### Install
