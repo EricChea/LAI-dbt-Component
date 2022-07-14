@@ -1,21 +1,20 @@
 import logging
 import os
-import sys
-from subprocess import Popen, PIPE, STDOUT
+from subprocess import PIPE, STDOUT, Popen
 
 import lightning as L
 
 
 class DBT(L.LightningWork):
-    def __init__(self, profile_name: str = None, env: dict = {}, log_level=30) -> None:
+    def __init__(self, profile_name: str = None, env: dict = {}, log_level=30):
         super().__init__()
 
         self.profile_name = profile_name
         self.env = env
         self.log_level = log_level
 
-    def execute_command(self, command):
-        self.run(action="execute_command", command=command)
+    def execute_command(self, command, *args, **kwargs):
+        self.run(action="execute_command", command=command, *args, **kwargs)
 
     def _execute_command(self, command):
 
@@ -39,4 +38,3 @@ class DBT(L.LightningWork):
 
         if action == "execute_command":
             self._execute_command(*args, **kwargs)
-
