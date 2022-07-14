@@ -17,9 +17,9 @@ class DBT(L.LightningWork):
     def execute_command(self, command, start_ts=time.time()):
         self.run(action="execute_command", command=command, start_ts=start_ts)
 
-    def _execute_command(self, command, executed_at):
+    def _execute_command(self, command, start_ts):
 
-        logging.log(self.log_level, f"Executed at {executed_at}")
+        logging.log(self.log_level, f"Started at {start_ts}")
 
         env = os.environ.copy()
         env.update(self.env)
