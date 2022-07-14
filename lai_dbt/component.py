@@ -1,5 +1,6 @@
 import logging
 import os
+import time
 from subprocess import PIPE, STDOUT, Popen
 
 import lightning as L
@@ -13,10 +14,12 @@ class DBT(L.LightningWork):
         self.env = env
         self.log_level = log_level
 
-    def execute_command(self, command, *args, **kwargs):
-        self.run(action="execute_command", command=command, *args, **kwargs)
+    def execute_command(self, command, start_ts=time.time()):
+        self.run(action="execute_command", command=command, start_ts=start_ts)
 
-    def _execute_command(self, command):
+    def _execute_command(self, command, executed_at):
+
+        logging.log(self.log_level, f"Executed at {executed_at}")
 
         env = os.environ.copy()
         env.update(self.env)
