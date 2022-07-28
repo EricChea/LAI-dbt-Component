@@ -7,8 +7,8 @@ import lightning as L
 
 
 class DBT(L.LightningWork):
-    def __init__(self, profile_name: str = None, env: dict = {}, log_level=30):
-        super().__init__()
+    def __init__(self, profile_name: str = None, env: dict = {}, log_level=30, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
         self.profile_name = profile_name
         self.env = env
