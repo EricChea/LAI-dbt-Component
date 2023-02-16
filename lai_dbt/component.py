@@ -18,7 +18,6 @@ class DBT(L.LightningWork):
         self.run(action="execute_command", command=command, start_ts=start_ts)
 
     def _execute_command(self, command, start_ts):
-
         logging.log(self.log_level, f"Started at {start_ts}")
 
         env = os.environ.copy()
@@ -38,6 +37,5 @@ class DBT(L.LightningWork):
                 logging.error(sub_process.returncode)
 
     def run(self, action, *args, **kwargs):
-
         if action == "execute_command":
             self._execute_command(*args, **kwargs)

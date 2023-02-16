@@ -40,7 +40,14 @@ class YourComponent(L.LightningFlow):
 
     def run(self):
         self.dbt.execute_command(
-            command=["dbt", "run", "--project-dir", self.dbt_project_dir, "--profiles-dir", self.dbt_profile_dir],
+            command=[
+                "dbt",
+                "run",
+                "--project-dir",
+                self.dbt_project_dir,
+                "--profiles-dir",
+                self.dbt_profile_dir,
+            ],
         )
 
 
